@@ -1,24 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Route, NavLink} from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './components/login';
+import FriendsList from './components/friendsList';
+import AddFriend from './components/addFriend';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route exact path='/'>
+        <h1>Hello Friends!</h1>
+        <NavLink to='/login'>
+          <h3>Log In</h3>
+        </NavLink>
+      </Route>
+
+      <Route path='/login'>
+        <Login />
+      </Route>
+
+      <PrivateRoute path='/friendslist' component={FriendsList} />
+      <PrivateRoute path='/friendform' component={AddFriend} />
     </div>
   );
 }
